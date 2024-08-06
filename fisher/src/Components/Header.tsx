@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,11 +12,14 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import EmailIcon from '@mui/icons-material/Email';
+import { Link } from 'react-router-dom';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Paintings', 'Prints', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar() {
+function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -36,28 +39,26 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="fixed"  color='transparent' sx={{ top: 0}}>
+    <AppBar position="static" color="transparent">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box display={'flex'}>
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#Steve-Fisher-Arts"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'black',
               textDecoration: 'none',
             }}
           >
             STEVE FISHER ARTS
           </Typography>
-          </Box>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -90,15 +91,19 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center">
+                    <Link to={`/${page}`} style={{ textDecoration: 'none', color: 'black' }}>
+                      {page}
+                    </Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
           <Typography
             variant="h6"
-            component="a"
-            href="#Steve-Fisher-Arts"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -106,7 +111,7 @@ function ResponsiveAppBar() {
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
-              color: 'inherit',
+              color: 'black',
               textDecoration: 'none',
             }}
           >
@@ -117,15 +122,17 @@ function ResponsiveAppBar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'inherit', display: 'block' }}
+                sx={{ my: 2, color: 'black', display: 'block' }}
               >
-                {page}
+                <Link to={`/${page}`} style={{ textDecoration: 'none', color: 'black' }}>
+                  {page}
+                </Link>
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
+            {/* <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
@@ -148,14 +155,35 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" sx={{ color: 'black' }}>{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu>
+            </Menu> */}
+            <Tooltip title="Facebook">
+              <IconButton
+                component="a"
+                href="https://www.facebook.com/yourprofile"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{ color: 'black' }}
+              >
+                <FacebookIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Email">
+              <IconButton
+                component="a"
+                href="mailto:your.email@example.com"
+                sx={{ color: 'black' }}
+              >
+                <EmailIcon />
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+
+export default Navbar;
