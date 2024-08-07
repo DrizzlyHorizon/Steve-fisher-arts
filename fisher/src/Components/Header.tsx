@@ -12,8 +12,6 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import EmailIcon from '@mui/icons-material/Email';
 import { Link } from 'react-router-dom';
 
 const pages = ['Paintings', 'Prints', 'Contact'];
@@ -132,7 +130,7 @@ function Navbar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {/* <Tooltip title="Open settings">
+            <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
@@ -158,27 +156,7 @@ function Navbar() {
                   <Typography textAlign="center" sx={{ color: 'black' }}>{setting}</Typography>
                 </MenuItem>
               ))}
-            </Menu> */}
-            <Tooltip title="Facebook">
-              <IconButton
-                component="a"
-                href="https://www.facebook.com/yourprofile"
-                target="_blank"
-                rel="noopener noreferrer"
-                sx={{ color: 'black' }}
-              >
-                <FacebookIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title="Email">
-              <IconButton
-                component="a"
-                href="mailto:your.email@example.com"
-                sx={{ color: 'black' }}
-              >
-                <EmailIcon />
-              </IconButton>
-            </Tooltip>
+            </Menu>
           </Box>
         </Toolbar>
       </Container>
