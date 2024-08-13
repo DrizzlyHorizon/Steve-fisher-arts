@@ -4,7 +4,7 @@ const Contact = () => {
   return (
     <div>
         <h1>
-            HEY CONTACT ME HERE:
+            This is where the archive is.
         </h1>
     </div>
   );

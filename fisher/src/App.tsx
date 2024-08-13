@@ -6,8 +6,9 @@ import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom
 import { useThemeContext } from './theme/ThemeContextProvider';
 import Home from './areas/Home';
 import Paintings from './areas/Paintings/Paintings';
-import Prints from './areas/Prints/Prints';
+import Monotypes from './areas/Monotypes/Monotypes';
 import Contact from './areas/Contact/Contact';
+import Archive from './areas/Archive/Archive';
 import Footer from './Components/Footer';
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path='Paintings' element={<Paintings />} />
-            <Route path='Prints' element={<Prints />} />
+            <Route path='Monotypes' element={<Monotypes />} />
+            <Route path='Archive' element={<Archive />} />
             <Route path='Contact' element={<Contact />} />
           </Route>
         </Routes>
