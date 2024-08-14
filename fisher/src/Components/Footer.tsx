@@ -47,7 +47,7 @@ export default function Footer() {
     return (
         <>
             <ElevationScroll>
-                <AppBar position="fixed" color='transparent' sx={{ top: 'auto', bottom: 0 }}>
+                <AppBar position="fixed" color='transparent' sx={{ top: 'auto', bottom: 0, backgroundColor:'white' }}>
                     <Toolbar>
                         <Button><Link className='social' to='/'>©2024 Steve Fisher Arts</Link></Button>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>

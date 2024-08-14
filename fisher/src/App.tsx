@@ -4,7 +4,7 @@ import Navbar from './Components/Header';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import { BrowserRouter as Router, Route, Routes, Outlet } from 'react-router-dom';
 import { useThemeContext } from './theme/ThemeContextProvider';
-import Home from './areas/Home';
+import Home from './areas/Home/Home';
 import Paintings from './areas/Paintings/Paintings';
 import Monotypes from './areas/Monotypes/Monotypes';
 import Contact from './areas/Contact/Contact';
