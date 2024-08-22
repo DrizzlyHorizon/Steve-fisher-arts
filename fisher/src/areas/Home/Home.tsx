@@ -64,7 +64,7 @@ const Home = () => {
       <Typography variant="h4" align="center" gutterBottom>
         Featured Artworks
       </Typography>
-      <ImageList variant="masonry" cols={3} gap={8}>
+      <ImageList variant="masonry" cols={3} gap={8} rowHeight={600}>
           {itemData.map((item) => (
             <ImageListItem key={item.img}>
               <img

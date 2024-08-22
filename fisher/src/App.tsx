@@ -7,6 +7,7 @@ import { useThemeContext } from './theme/ThemeContextProvider';
 import Home from './areas/Home/Home';
 import Paintings from './areas/Paintings/Paintings';
 import Monotypes from './areas/Monotypes/Monotypes';
+import Drawings from './Drawings/Drawings';
 import Contact from './areas/Contact/Contact';
 import Archive from './areas/Archive/Archive';
 import Footer from './Components/Footer';
@@ -24,6 +25,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path='Paintings' element={<Paintings />} />
             <Route path='Monotypes' element={<Monotypes />} />
+            <Route path='Drawings' element={<Drawings/>} />
             <Route path='Archive' element={<Archive />} />
             <Route path='Contact' element={<Contact />} />
           </Route>
