@@ -7,10 +7,12 @@ import { useThemeContext } from './theme/ThemeContextProvider';
 import Home from './areas/Home/Home';
 import Paintings from './areas/Paintings/Paintings';
 import Monotypes from './areas/Monotypes/Monotypes';
-import Drawings from './Drawings/Drawings';
+import Drawings from './areas/Drawings/Drawings';
 import Contact from './areas/Contact/Contact';
 import Archive from './areas/Archive/Archive';
 import Footer from './Components/Footer';
+import CategoryPage from './Components/CategoryPage'; 
+
 
 function App() {
   const { theme } = useThemeContext();
@@ -28,6 +30,7 @@ function App() {
             <Route path='Drawings' element={<Drawings/>} />
             <Route path='Archive' element={<Archive />} />
             <Route path='Contact' element={<Contact />} />
+            <Route path="/category/:categoryName" element={<CategoryPage />} />
           </Route>
         </Routes>
         <Footer />

@@ -6,7 +6,7 @@ import * as paintings from '../../Categories/PaintingsList';
 import * as sculptures from '../../Categories/SculpturesList';
 import * as photography from '../../Categories/PhotographyList';
 
-export default function Monotypes() {
+export default function Drawings() {
   const categories = ['Paintings', 'Sculptures', 'Photography'];
   const artTypes = [paintings, sculptures, photography];
 

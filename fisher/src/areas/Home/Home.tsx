@@ -38,8 +38,7 @@ const Home = () => {
           src={landingPage}
           alt="Landing Page Top"
           style={{
-            width: '99%',
-            height: '50%',
+            height: '50vh',
             borderRadius: '4px',
           }}
         />
