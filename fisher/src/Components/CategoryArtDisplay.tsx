@@ -45,7 +45,7 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
       </ul>
 
       <Box sx={{ width: '100%', height: '80vh', overflowX: 'auto' }} onClick={() => handleImageClick(categories[selectedTab])}>
-        <ImageList sx={{ width: '100%', height: 'auto', display: 'flex', flexWrap: 'nowrap', scrollBehavior: 'smooth' }} rowHeight={'auto'}>
+        <ImageList sx={{ width: '100%', height: 'auto', display: 'flex', flexWrap: 'nowrap', paddingBottom: '10px' }} rowHeight={'auto'}>
           {getCurrentArtworks().map((art: { img: React.Key | null | undefined; title: string | undefined; }) => (
             <ImageListItem key={art.img} sx={{ width: '33%' }}>
               <img
