@@ -20,8 +20,8 @@ const CategoryPage: React.FC = () => {
   const artworks = categoryName && categoriesMap[categoryName] ? categoriesMap[categoryName].default : [];
 
   return (
-    <Box sx={{ width: '100%', height: '100vh', overflowY: 'auto' }}>
-      <ImageList cols={1}>
+    <Box sx={{ width: '100%', height: '100vh' }}>
+      <ImageList cols={1} sx={{ paddingBottom: '15px' }}>
         {artworks.map((art: { img: React.Key | null | undefined; title: string | undefined; }) => (
           <ImageListItem key={art.img}>
             <img
@@ -29,7 +29,7 @@ const CategoryPage: React.FC = () => {
               srcSet={`${art.img}?w=600&fit=crop&auto=format&dpr=2 2x`}
               alt={art.title}
               loading="lazy"
-              style={{ objectFit: 'contain', width: '100%' }}
+              style={{ objectFit: 'contain', width: '100%', maxHeight: '100vh' }}
             />
           </ImageListItem>
         ))}

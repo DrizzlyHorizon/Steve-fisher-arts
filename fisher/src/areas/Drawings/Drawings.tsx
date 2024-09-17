@@ -10,5 +10,5 @@ export default function Drawings() {
   const categories = ['Paintings', 'Sculptures', 'Photography'];
   const artTypes = [paintings, sculptures, photography];
 
-  return <CategoryArtDisplay categories={categories} artTypes={artTypes} />;
+  return <CategoryArtDisplay categories={categories} artTypes={artTypes} quote="Art is the journey of a free soul." />;
 }

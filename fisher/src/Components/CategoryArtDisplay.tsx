@@ -6,9 +6,10 @@ import './CategoryArtDisplay.css';
 interface CategoryArtDisplayProps {
   categories: string[];
   artTypes: any[];
+  quote: string; // New prop for the quote
 }
 
-const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, artTypes }) => {
+const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, artTypes, quote }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
   // Function to get a slice of 3 items from the selected category
   const getCurrentArtworks = () => {
     const startIndex = 0; // Pagination can be implemented by updating startIndex
-    const endIndex = startIndex + 3;
+    const endIndex = startIndex + 2; // Get only the first two artworks
     return artTypes[selectedTab].default.slice(startIndex, endIndex);
   };
 
@@ -46,6 +47,12 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
 
       <Box sx={{ width: '100%', height: '80vh', overflowX: 'auto' }} onClick={() => handleImageClick(categories[selectedTab])}>
         <ImageList sx={{ width: '100%', height: 'auto', display: 'flex', flexWrap: 'nowrap', paddingBottom: '10px' }} rowHeight={'auto'}>
+        <ImageListItem sx={{ width: '33%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Box sx={{ textAlign: 'center', fontStyle: 'italic', padding: '10px' }}>
+              {quote}
+            </Box>
+          </ImageListItem>
+          
           {getCurrentArtworks().map((art: { img: React.Key | null | undefined; title: string | undefined; }) => (
             <ImageListItem key={art.img} sx={{ width: '33%' }}>
               <img
@@ -56,7 +63,7 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
                 style={{ objectFit: 'contain', height: '100%', width: '100%' }}
               />
             </ImageListItem>
-          ))}
+          ))} 
         </ImageList>
       </Box>
     </Box>
