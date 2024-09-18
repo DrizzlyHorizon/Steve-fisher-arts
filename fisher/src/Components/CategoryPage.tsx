@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { ImageList, ImageListItem, Box } from '@mui/material';
+import { ImageList, ImageListItem, Box, Button, Fab } from '@mui/material';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 // Import your category data
 import * as paintings from '../Categories/PaintingsList';
@@ -22,7 +23,7 @@ const CategoryPage: React.FC = () => {
   return (
     <Box sx={{ width: '100%', height: '100vh' }}>
       <ImageList cols={1} sx={{ paddingBottom: '15px' }}>
-        {artworks.map((art: { img: React.Key | null | undefined; title: string | undefined; }) => (
+        {artworks.map((art: { img: React.Key | null | undefined; title: string | undefined; forSale?: boolean }) => (
           <ImageListItem key={art.img}>
             <img
               src={`${art.img}?w=600&fit=crop&auto=format`}
@@ -31,6 +32,15 @@ const CategoryPage: React.FC = () => {
               loading="lazy"
               style={{ objectFit: 'contain', width: '100%', maxHeight: '100vh' }}
             />
+            {/* Conditionally render a 'For Sale' button or label if the artwork is for sale */}
+            {art.forSale && (
+              <Box sx={{ textAlign: 'center', margin: '15px' }}>
+                <Fab color='default' variant="extended">
+                  <AttachMoneyIcon sx={{ mr: 1 }} />
+                  For Sale
+                </Fab>
+              </Box>
+            )}
           </ImageListItem>
         ))}
       </ImageList>
