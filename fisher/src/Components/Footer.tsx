@@ -4,21 +4,25 @@ import { Link } from 'react-router-dom';
 import Modal from '@mui/material/Modal';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import EmailIcon from '@mui/icons-material/Email';
-import ContactForm from './ContactForm'; // Import the new ContactForm component
+import ContactForm from './ContactForm'; // Import the ContactForm component
 import './Footer.css';
 
 export default function Footer() {
-    const [open, setOpen] = React.useState(false);
-    const [snackbarOpen, setSnackbarOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false); // For opening the modal
+    const [snackbarOpen, setSnackbarOpen] = React.useState(false); // For snackbar message
 
+    // Open the contact form modal
     const handleOpen = () => setOpen(true);
 
+    // Close the contact form modal
     const handleClose = () => {
         setOpen(false);
     };
 
+    // Open snackbar (for success message)
     const handleSnackbarOpen = () => setSnackbarOpen(true);
 
+    // Close snackbar
     const handleSnackbarClose = (event: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
@@ -26,13 +30,16 @@ export default function Footer() {
         setSnackbarOpen(false);
     };
 
+    // Handle form submission, show snackbar, and close the modal
     const handleSubmit = (data: { name: string; email: string; message: string }) => {
-        handleSnackbarOpen();
-        handleClose();
+        console.log('Form Submitted:', data); // You can log or process the form data here
+        handleSnackbarOpen(); // Show snackbar
+        handleClose(); // Close the modal
     };
 
     return (
         <>
+            {/* Footer Bar */}
             <ElevationScroll>
                 <AppBar position="fixed" color="transparent" sx={{ top: 'auto', bottom: 0, backgroundColor: 'white' }}>
                     <Toolbar>
@@ -40,7 +47,13 @@ export default function Footer() {
                             <Link className="social" to="/">©2024 Steve Fisher Arts</Link>
                         </Button>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}></Typography>
-                        <Button className="social" color={'inherit'} onClick={handleOpen}>Contact Us</Button>
+                        
+                        {/* Contact Us Button */}
+                        <Button className="social" color={'inherit'} onClick={handleOpen}>
+                            Contact Us
+                        </Button>
+
+                        {/* Facebook Icon */}
                         <Tooltip title="Facebook">
                             <IconButton
                                 component="a"
@@ -52,6 +65,8 @@ export default function Footer() {
                                 <FacebookIcon />
                             </IconButton>
                         </Tooltip>
+
+                        {/* Email Icon */}
                         <Tooltip title="Email">
                             <IconButton
                                 component="a"
@@ -65,6 +80,7 @@ export default function Footer() {
                 </AppBar>
             </ElevationScroll>
 
+            {/* Contact Form Modal */}
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -72,9 +88,10 @@ export default function Footer() {
                 aria-describedby="modal-modal-description"
                 className="modal"
             >
-                <ContactForm onClose={handleClose} onSubmit={handleSubmit} />
+                <ContactForm onClose={handleClose} />
             </Modal>
 
+            {/* Snackbar for form submission confirmation */}
             <Snackbar
                 open={snackbarOpen}
                 autoHideDuration={6000}
@@ -90,6 +107,7 @@ export default function Footer() {
     );
 }
 
+// Helper component for elevation scroll effect (sticky footer)
 interface Props {
     window?: () => Window;
     children: React.ReactElement;

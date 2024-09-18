@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ImageList, ImageListItem, Box, Fab, Modal, TextField, Button, Stack } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import emailjs from 'emailjs-com';
 
 // Import your category data
 import * as paintings from '../Categories/PaintingsList';
@@ -20,9 +21,13 @@ const CategoryPage: React.FC = () => {
   // Ensure categoryName is not undefined and is a valid key in categoriesMap
   const artworks = categoryName && categoriesMap[categoryName] ? categoriesMap[categoryName].default : [];
 
-  // State to control the modal visibility
+  // State to control the modal visibility and form input
   const [open, setOpen] = useState(false);
   const [selectedArt, setSelectedArt] = useState<{ title: string | undefined } | null>(null);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [emailStatus, setEmailStatus] = useState<string | null>(null);
 
   const handleClick = (art: { title: string | undefined }) => {
     setSelectedArt(art); // Set the selected artwork
@@ -36,8 +41,28 @@ const CategoryPage: React.FC = () => {
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Handle the form submission logic (e.g., send data to server or API)
-    console.log('Form submitted for:', selectedArt?.title);
+
+    const templateParams = {
+      name,
+      email,
+      message,
+      artworkTitle: selectedArt?.title,
+    };
+
+    // Send email using EmailJS
+    emailjs
+      .send('service_slkbh7l', 'template_4xn3t66', templateParams, 'F7Up33vnoC4ECkJVq')
+      .then(
+        (response) => {
+          console.log('SUCCESS!', response.status, response.text);
+          setEmailStatus('Email sent successfully');
+        },
+        (error) => {
+          console.error('FAILED...', error);
+          setEmailStatus('Failed to send email');
+        }
+      );
+
     handleClose(); // Close the modal after form submission
   };
 
@@ -53,7 +78,6 @@ const CategoryPage: React.FC = () => {
               loading="lazy"
               style={{ objectFit: 'contain', width: '100%', maxHeight: '100vh' }}
             />
-            {/* Conditionally render a 'For Sale' button or label if the artwork is for sale */}
             {art.forSale && (
               <Box sx={{ textAlign: 'center', margin: '15px' }}>
                 <Fab color='default' variant="extended" onClick={() => handleClick(art)}>
@@ -66,7 +90,6 @@ const CategoryPage: React.FC = () => {
         ))}
       </ImageList>
 
-      {/* Modal for displaying the form */}
       <Modal
         open={open}
         onClose={handleClose}
@@ -90,6 +113,8 @@ const CategoryPage: React.FC = () => {
           <p id="modal-description">Please fill out the form to inquire about this artwork.</p>
           <TextField
             label="Your Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
             fullWidth
             margin="normal"
@@ -97,6 +122,8 @@ const CategoryPage: React.FC = () => {
           <TextField
             label="Your Email"
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
             fullWidth
             margin="normal"
@@ -105,18 +132,21 @@ const CategoryPage: React.FC = () => {
             label="Message"
             multiline
             rows={4}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             fullWidth
             margin="normal"
             required
           />
           <Stack direction="row" spacing={2} sx={{ marginTop: 2 }}>
-            <Button variant="contained" color="primary" type="submit">
+            <Button variant="contained" color="success" type="submit">
               Submit
             </Button>
-            <Button variant="outlined" color="secondary" onClick={handleClose}>
+            <Button variant="outlined" color="error" onClick={handleClose}>
               Cancel
             </Button>
           </Stack>
+          {emailStatus && <p>{emailStatus}</p>}
         </Box>
       </Modal>
     </Box>
