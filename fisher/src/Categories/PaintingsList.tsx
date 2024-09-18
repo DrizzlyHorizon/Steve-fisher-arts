@@ -3,6 +3,7 @@ const paintings = [
     {
         img: 'https://uploads5.wikiart.org/images/leonardo-da-vinci/mona-lisa.jpg',
         title: 'Mona Lisa - Leonardo da Vinci',
+        forSale:'true',
       },
       {
         img: 'https://uploads1.wikiart.org/images/claude-monet/water-lilies-1919.jpg',
