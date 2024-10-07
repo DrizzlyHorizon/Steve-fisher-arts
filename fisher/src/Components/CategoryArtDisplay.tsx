@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ImageList, ImageListItem, Box, useMediaQuery, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close'; 
 import './CategoryArtDisplay.css';
 
 interface CategoryArtDisplayProps {
@@ -42,21 +43,40 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
       {isMobile ? (
         <>
           {/* Mobile View: Show a Drawer for Categories */}
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={() => setDrawerOpen(true)}
-            sx={{ position: 'fixed', zIndex: 1300 }}
-          >
-            <MenuIcon />
-          </IconButton>
+          {!drawerOpen && (
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => setDrawerOpen(true)}
+              sx={{
+                position: 'fixed',
+                top: '64px', // Adjust based on header height
+                left: '16px', // Optional: Adjust left position as needed
+                zIndex: 1300,
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
           <Drawer
             anchor="left"
             open={drawerOpen}
             onClose={() => setDrawerOpen(false)}
           >
-            <List>
+            {/* Close Button Inside Drawer, before the List */}
+            <IconButton
+              edge="end"
+              color="inherit"
+              aria-label="close"
+              onClick={() => setDrawerOpen(false)}
+              sx={{ justifyContent: 'left' }} // Adjust to be left-aligned
+              >
+              <CloseIcon />
+            </IconButton>
+
+            {/* List of Categories */}
+            <List> 
               {categories.map((category, index) => (
                 <ListItem key={index} onClick={() => handleTabChange(index)}>
                   <ListItemText primary={category} />
