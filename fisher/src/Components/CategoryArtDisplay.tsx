@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ImageList, ImageListItem, Box, useMediaQuery, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close'; 
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import './CategoryArtDisplay.css';
 
 interface CategoryArtDisplayProps {
@@ -43,35 +44,34 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
       {isMobile ? (
         <>
           {/* Mobile View: Show a Drawer for Categories */}
-          {!drawerOpen && (
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={() => setDrawerOpen(true)}
-              sx={{
-                position: 'fixed',
-                top: '64px', // Adjust based on header height
-                left: '16px', // Optional: Adjust left position as needed
-                zIndex: 1300,
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => setDrawerOpen(true)}
+            sx={{
+              position: 'fixed',
+              top: '64px',
+              left: '16px',
+              zIndex: 1300,
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+
           <Drawer
             anchor="left"
             open={drawerOpen}
             onClose={() => setDrawerOpen(false)}
           >
-            {/* Close Button Inside Drawer, before the List */}
+            {/* Close Button Inside Drawer */}
             <IconButton
               edge="end"
               color="inherit"
               aria-label="close"
               onClick={() => setDrawerOpen(false)}
-              sx={{ justifyContent: 'left' }} // Adjust to be left-aligned
-              >
+              sx={{ justifyContent: 'left' }}
+            >
               <CloseIcon />
             </IconButton>
 
@@ -87,11 +87,12 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
 
           {/* Mobile View: Text Above Image */}
           <Box 
+            onClick={() => handleImageClick(categories[selectedTab])}
             sx={{ 
               width: '100%', 
               display: 'flex',
-              alignItems: 'center', // Center vertically
-              justifyContent: 'center', // Center horizontally
+              alignItems: 'center',
+              justifyContent: 'center',
               fontStyle: 'italic', 
               maxWidth: '500px', 
               marginLeft: '10px',
@@ -100,7 +101,7 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
           >
             {truncatedQuote}
           </Box>
-
+          
           <ImageList sx={{ width: '100%', height: 'auto', display: 'flex', justifyContent: 'center', paddingBottom: '10px' }} rowHeight={'auto'}>
             {getCurrentArtworks().map((art: { img: React.Key | null | undefined; title: string | undefined; }) => (
               <ImageListItem key={art.img} sx={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -110,8 +111,21 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
                   alt={art.title}
                   loading="lazy"
                   style={{ objectFit: 'contain', height: '100%', width: '100%' }}
+                  onClick={() => handleImageClick(categories[selectedTab])} // Make images clickable
                 />
-              </ImageListItem>
+                <ExpandMoreIcon 
+                        sx={{
+                          position: 'absolute',
+                          bottom: '15vh',
+                          right: '10px',
+                          color: 'gray', // Icon color
+                          fontSize: '45px', // Adjust icon size
+                          zIndex: 10, // Ensure it's on top
+                          opacity: 0.8, // Slightly transparent
+                        }}            
+                        onClick={() => handleImageClick(categories[selectedTab])}
+                      />
+                </ImageListItem>
             ))} 
           </ImageList>
         </>
@@ -122,10 +136,11 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
             sx={{ 
               display: 'flex', 
               flexDirection: 'column', 
-              justifyContent: 'center', // Center vertically
-              alignItems: 'center', // Center horizontally
-              height: '80vh', // or '100vh' depending on your layout
-              marginLeft: '20px'
+              justifyContent: 'center', 
+              alignItems: 'center', 
+              height: '80vh',
+              marginLeft: '20px',
+              marginRight: '20px',
             }}
           >
             <ul style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 0 }}>
@@ -135,7 +150,7 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
                   style={{
                     listStyleType: index === selectedTab ? 'disc' : 'none',
                     cursor: 'pointer',
-                    margin: '5px 0', // Adjust margin for spacing between items
+                    margin: '5px 0',
                   }}
                   onClick={() => handleTabChange(index)}
                 >
@@ -147,18 +162,19 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
 
           {/* Desktop View: Image and Quote Side by Side */}
           <Box 
+            className="box-hover"
             sx={{ 
-              width: '100%', 
+              width: '90%', 
               height: '80vh', 
               display: 'flex', 
               justifyContent: 'center', 
               alignItems: 'center', 
-              flexDirection: 'row', // Horizontal layout for desktop
+              flexDirection: 'row',
+              marginTop: '3vh',
             }} 
-            onClick={() => handleImageClick(categories[selectedTab])}
           >
             <ImageList sx={{ width: '33%', height: 'auto', display: 'flex', justifyContent: 'center', paddingBottom: '10px' }} rowHeight={'auto'}>
-              <ImageListItem sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+              <ImageListItem sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} onClick={() =>  handleImageClick(categories[selectedTab])}>
                 <Box sx={{ textAlign: 'center', fontStyle: 'italic', padding: '10px' }}>
                   {quote}
                 </Box>
@@ -174,6 +190,7 @@ const CategoryArtDisplay: React.FC<CategoryArtDisplayProps> = ({ categories, art
                     alt={art.title}
                     loading="lazy"
                     style={{ objectFit: 'contain', height: '100%', width: '100%' }}
+                    onClick={() => handleImageClick(categories[selectedTab])} // Make images clickable
                   />
                 </ImageListItem>
               ))} 

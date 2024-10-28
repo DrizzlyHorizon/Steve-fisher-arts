@@ -1,3 +1,23 @@
 li {
     padding: 4%;
 }
+
+/* CategoryArtDisplay.css */
+.box-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+}
+  
+  .box-hover:hover {
+    transform: scale(1.02); /* Subtle zoom effect */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* Stronger shadow effect */
+    cursor: pointer; /* Pointer cursor to indicate clickability */
+    border-radius: 10px; /* Rounded corners on hover */
+  }
+
+  /* Tap effect for mobile */
+.box-tap:active {
+    transform: scale(0.98); /* Slightly shrink on tap */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Softer shadow on tap */
+    border-radius: 10px;
+  }
+  

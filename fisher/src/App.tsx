@@ -14,6 +14,7 @@ import Footer from './Components/Footer';
 import CategoryPage from './Components/CategoryPage'; 
 
 
+
 function App() {
   const { theme } = useThemeContext();
 
