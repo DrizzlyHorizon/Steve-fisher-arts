@@ -27,18 +27,16 @@ const ContactForm: React.FC<ContactFormProps> = ({ onClose }) => {
     // Send email using EmailJS
     emailjs
       .send(
-        'service_slkbh7l',    // Replace with your EmailJS service ID
-        'template_mdvalo8',   // Replace with your EmailJS template ID
+        'service_slkbh7l',    
+        'template_mdvalo8',  
         templateParams, 
-        'F7Up33vnoC4ECkJVq'        // Replace with your EmailJS user ID
+        'F7Up33vnoC4ECkJVq'        
       )
       .then(
         (response) => {
-          console.log('SUCCESS!', response.status, response.text);
           setEmailStatus('Email sent successfully!');
         },
         (error) => {
-          console.error('FAILED...', error);
           setEmailStatus('Failed to send email.');
         }
       );
