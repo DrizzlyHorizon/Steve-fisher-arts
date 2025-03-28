@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import emailjs from 'emailjs-com';
+import '../../styles.css';
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -43,22 +44,15 @@ const Contact = () => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontFamily: 'Arial, sans-serif',
-      }}
-    >
-      <div style={{ textAlign: 'center' }}>
-        <h1>Contact Me</h1>
-        <p>
+    <div className="fade-in" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'Arial, sans-serif' }}>
+      <div style={{ textAlign: 'center' }} className="fade-in">
+        <h1 className="fade-in">Contact Me</h1>
+        <p className="fade-in">
           I'd love to hear from you! Whether you have questions about my artwork,
           commissions, or just want to say hello, feel free to reach out.
         </p>
-        <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: '20px auto' }}>
-          <div style={{ marginBottom: '10px' }}>
+        <form onSubmit={handleSubmit} style={{ maxWidth: '400px', margin: '20px auto' }} className="fade-in">
+          <div style={{ marginBottom: '10px' }} className="fade-in">
             <label htmlFor="name" style={{ display: 'block', marginBottom: '5px' }}>Name:</label>
             <input
               type="text"
@@ -71,7 +65,7 @@ const Contact = () => {
               required
             />
           </div>
-          <div style={{ marginBottom: '10px' }}>
+          <div style={{ marginBottom: '10px' }} className="fade-in">
             <label htmlFor="email" style={{ display: 'block', marginBottom: '5px' }}>Email:</label>
             <input
               type="email"
@@ -84,7 +78,7 @@ const Contact = () => {
               required
             />
           </div>
-          <div style={{ marginBottom: '10px' }}>
+          <div style={{ marginBottom: '10px' }} className="fade-in">
             <label htmlFor="message" style={{ display: 'block', marginBottom: '5px' }}>Message:</label>
             <textarea
               id="message"
@@ -113,18 +107,18 @@ const Contact = () => {
               borderRadius: '4px',
               cursor: 'pointer',
             }}
+            className="fade-in"
           >
             Send Message
           </button>
         </form>
-        {/* Status message for email send success/failure */}
-        {emailStatus && <p>{emailStatus}</p>}
-        <div>
+        {emailStatus && <p className="fade-in">{emailStatus}</p>}
+        <div className="fade-in">
           <h3>Other Ways to Reach Me:</h3>
           <p>Email: <a href="mailto:artist@example.com">artist@example.com</a></p>
           <p>Phone: (123) 456-7890</p>
           <p>Follow me on social media:</p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginTop: '10px' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '15px', marginTop: '10px' }} className="fade-in">
             <a
               href="https://www.facebook.com/steve.fisher.7374480"
               target="_blank"
